@@ -219,8 +219,13 @@ class SharedResource:
                 delay=self.delay,
             )
         except Exception as err:
-            self._update_main_status("error")
-            raise SharedResourceError("Main worker failed during action") from err
+            if not self.action_is_recoverable:
+                self._update_main_status("error")
+                self.resource_file.unlink()
+                raise SharedResourceError('Main worker failed during action') from err
+            else:
+                self._update_main_status('action_error')
+                raise SharedResourceError('Recoverable failures in main worker') from err
 
     def _perform_action_with_validation(self):
         """Helper function to run the action and its validation."""
