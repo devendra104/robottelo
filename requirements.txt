@@ -4,7 +4,7 @@ apypie==0.8.0
 broker[satlab,docker,ssh2_python]==0.8.7
 cryptography==48.0.0
 deepdiff==9.0.0
-dynaconf[vault]==3.2.13
+dynaconf[vault]==3.3.3
 fastmcp-slim[client]==3.3.1
 fauxfactory==4.2.1
 jira==3.10.5
